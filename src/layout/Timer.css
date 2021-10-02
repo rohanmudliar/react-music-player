@@ -1,0 +1,12 @@
+.playing__container-timers {
+  grid-column: 2 / span 3;
+  grid-row: 7 / span 1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: space-between;
+  color: rgb(188, 188, 188);
+}
+
+.playing__container-durationTime {
+  justify-self: flex-end;
+}

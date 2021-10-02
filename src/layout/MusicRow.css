@@ -1,0 +1,53 @@
+.list__container-songCard {
+  width: 100%;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 4rem;
+  padding: 1rem 0;
+  border-radius: 2rem;
+}
+
+.list__container-songCard:hover {
+  background-color: var(--color-black-light);
+  cursor: pointer;
+}
+
+.list__container-songInfo {
+  color: rgb(211, 210, 210);
+  padding-left: 2rem;
+}
+
+.list__container-songInfo p:first-child {
+  font-size: 1.3rem;
+}
+
+.list__container-playPauseBtn {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: var(--color-black-light);
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  border-radius: 50%;
+  box-shadow: 0px 0px 10px 0px var(--color-white);
+  border: 3px solid var(--color-black-dark);
+}
+
+.list__container-songsList svg {
+  width: 50%;
+  height: 50%;
+  fill: var(--color-white);
+}
+
+.selected {
+  background-color: var(--color-black-dark);
+}
+
+.selected .list__container-playPauseBtn {
+  background-color: var(--color-primary);
+}
+
+.selected svg {
+  fill: white;
+}

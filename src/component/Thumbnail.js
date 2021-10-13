@@ -1,8 +1,7 @@
 import "./Thumbnail.css";
-const Thumbnail = (props) => {
-  const { id, className, imgSrc, defaultName } = props;
+const Thumbnail = ({ className, imgSrc, defaultName, onClick }) => {
   return (
-    <div id={id} className={`thumbnail ${className}`}>
+    <div className={`thumbnail ${className}`} onClick={onClick}>
       <img src={imgSrc} alt={defaultName} />
     </div>
   );

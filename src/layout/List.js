@@ -1,31 +1,38 @@
+import { useContext } from "react";
+
 import Thumbnail from "../component/Thumbnail";
-import MusicRow from "./MusicRow";
+import SongRows from "./SongRows";
 import songsList from "../songsList";
+import Button from "../component/Button";
+
+import CurrentSongContext from "../store/currentSongContext";
 
 import "./List.css";
 
-const List = () => {
+const List = (props) => {
+  const { currentSelectedSong } = useContext(CurrentSongContext);
+  const imgName = currentSelectedSong.thumbnail
+    ? currentSelectedSong.thumbnail
+    : "default.jpg";
   return (
     <div id="list" className="list">
       <div className="list__container">
-        <div id="list__container-backBtn" className="list__container-backBtn">
-          <svg className="backBtn">
-            <use href="icons/sprite.svg#icon-arrow-long-left"></use>
-          </svg>
-        </div>
-
-        <Thumbnail
-          id="list__container-currentPlayingThumbnail"
-          className="list__container-currentPlayingThumbnail"
-          imgSrc="images/default.jpg"
-          defaultName="default"
+        <Button
+          className="list__container-backBtn"
+          iconId="icon-arrow-long-left"
+          svgClassName="backBtn"
+          onClick={props.navBtnClick}
         />
 
-        <div
-          id="list__container-songsList"
-          className="list__container-songsList"
-        >
-          <MusicRow lists={songsList} />
+        <Thumbnail
+          className="list__container-currentPlayingThumbnail"
+          imgSrc={`images/${imgName}`}
+          defaultName="default"
+          onClick={props.navBtnClick}
+        />
+
+        <div className="list__container-songsList">
+          <SongRows lists={songsList} />
         </div>
       </div>
     </div>

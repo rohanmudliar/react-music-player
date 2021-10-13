@@ -1,5 +1,6 @@
 const songsList = [
   {
+    id: 0,
     title: "Dil Chahta Hai",
     artistName: "Shankar Mahadevan",
     thumbnail: "DilChahtaHai.jpg",
@@ -9,6 +10,7 @@ const songsList = [
       "https://docs.google.com/uc?export=download&id=198ayVAQhrsE4nZgQFjfZsFRToEPadC50",
   },
   {
+    id: 1,
     title: "Man Udhan Varyache",
     artistName: "Shankar Mahadevan",
     thumbnail: "ManUdhanVaryache.jpg",
@@ -18,6 +20,7 @@ const songsList = [
       "https://docs.google.com/uc?export=download&id=194E8BPvK9iZ0HRIoyJBKl1yJgAfiMgjA",
   },
   {
+    id: 2,
     title: "Jaane Kyun",
     artistName: "Vishal-Shankar, Vishal Dadlani",
     thumbnail: "JaaneKyun.jpg",
@@ -27,6 +30,7 @@ const songsList = [
       "https://docs.google.com/uc?export=download&id=18nCEy4OIi0jK4CdHdw4hXgBmaMtF6Hzm",
   },
   {
+    id: 3,
     title: "Ajnabee",
     artistName: "Bhuvan Bam",
     thumbnail: "Ajnabee.jpg",
@@ -36,6 +40,7 @@ const songsList = [
       "https://docs.google.com/uc?export=download&id=18xR85TRlNI0Dxz-jJ1mUERBdlP0_wmO3",
   },
   {
+    id: 4,
     title: "Nazrein Milaana",
     artistName: "Benny Dayal, Satish Chakravarthy",
     thumbnail: "NazreinMilaanaNazreinChuraana.jpg",
@@ -45,6 +50,7 @@ const songsList = [
       "https://docs.google.com/uc?export=download&id=18fLfs2W0HF-tn8RSHGRDvYEroVVHNMKj",
   },
   {
+    id: 5,
     title: "Pani Da Rang",
     artistName: "Ayushmann Khurrana",
     thumbnail: "PaniDaRang.jpg",
@@ -54,6 +60,7 @@ const songsList = [
       "https://docs.google.com/uc?export=download&id=19DJ0lUfzWA69DNPPfqEydnbjNt8cGDXP",
   },
   {
+    id: 6,
     title: "Qaafirana",
     artistName: "Arijit Singh, Nikhita Gandhi",
     thumbnail: "Qaafirana.jpg",
@@ -63,6 +70,7 @@ const songsList = [
       "https://docs.google.com/uc?export=download&id=19-4EDon0VZiSfjQ5pzsilQecCY4E3bMu",
   },
   {
+    id: 7,
     title: "Ajab Si",
     artistName: "KK",
     thumbnail: "AjabSi.jpg",
@@ -72,6 +80,7 @@ const songsList = [
       "https://docs.google.com/uc?export=download&id=19-scxHx0IGWAJvJhuvsl_aWGqK0igesb",
   },
   {
+    id: 8,
     title: "Tum Se Hi",
     artistName: "Mohit Chauhan",
     thumbnail: "TumSeHi.jpg",

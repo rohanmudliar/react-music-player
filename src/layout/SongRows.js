@@ -1,14 +1,28 @@
 import { Fragment, useContext } from "react";
-import Row from "./Row";
-import CurrentSongContext from "../store/currentSongContext";
 
-import "./SongRows.css";
+import Row from "../component/Row";
+
+import PlayerStateContext from "../store/PlayerStateContext";
 
 const SongRows = ({ lists }) => {
-  const { setcurrentSelectedSong } = useContext(CurrentSongContext);
+  const {
+    setCurrentSelectedSong,
+    isSongPlaying,
+    setIsSongPlaying,
+    selectedRowId,
+    setCurrentRowId,
+  } = useContext(PlayerStateContext);
 
-  const currentSongDetails = (idx) => {
-    setcurrentSelectedSong(lists[idx]);
+  const playBtnHandler = (event) => {
+    const dataCardNo = event.target.getAttribute("data-cardno");
+    setCurrentRowId(+dataCardNo);
+    setCurrentSelectedSong(lists[dataCardNo]);
+    setIsSongPlaying(true);
+  };
+
+  const pauseBtnHandler = (event) => {
+    event.stopPropagation();
+    setIsSongPlaying(false);
   };
 
   return (
@@ -18,8 +32,11 @@ const SongRows = ({ lists }) => {
           key={idx}
           idx={idx}
           title={title}
+          isSelected={selectedRowId === idx}
           artistName={artistName}
-          currentSongDetails={currentSongDetails}
+          playBtnHandler={playBtnHandler}
+          pauseBtnHandler={pauseBtnHandler}
+          isPlaying={selectedRowId === idx ? isSongPlaying : false}
         />
       ))}
     </Fragment>

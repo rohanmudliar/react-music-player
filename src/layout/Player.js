@@ -1,53 +1,157 @@
 import { useContext } from "react";
+import styled from "styled-components";
+
+import Controls from "./Controls";
 import Thumbnail from "../component/Thumbnail";
-import Controls from "../component/Controls";
 import Button from "../component/Button";
-import Timer from "./Timer";
-import Slider from "./Slider";
+import Timer from "../component/Timer";
+import Slider from "../component/Slider";
 
-import CurrentSongContext from "../store/currentSongContext";
+import PlayerStateContext from "../store/PlayerStateContext";
 
-import "./Player.css";
+const Player = ({
+  navBtnClick,
+  className,
+  replayHandler,
+  timers,
+  audioObj,
+}) => {
+  const {
+    currentSelectedSong,
+    isSongPlaying,
+    setIsSongPlaying,
+    songsList,
+    selectedRowId,
+    setCurrentRowId,
+    sliderVal,
+  } = useContext(PlayerStateContext);
 
-const Player = (props) => {
-  const { currentSelectedSong } = useContext(CurrentSongContext);
+  const playPauseHandler = () => {
+    setIsSongPlaying((previousState) => !previousState);
+  };
+
+  const previousBtnHandler = () => {
+    if (audioObj.currentTime < 3) {
+      if (selectedRowId === 0) {
+        setCurrentRowId(songsList.length - 1);
+      } else {
+        setCurrentRowId((previousId) => previousId - 1);
+      }
+    } else {
+      setCurrentRowId((previousId) => previousId);
+      replayHandler();
+    }
+  };
+
+  const nextBtnHandler = () => {
+    if (selectedRowId === songsList.length - 1) {
+      setCurrentRowId(0);
+    } else {
+      setCurrentRowId((previousId) => previousId + 1);
+    }
+  };
+
   const imgName = currentSelectedSong.thumbnail
     ? currentSelectedSong.thumbnail
     : "default.jpg";
 
-  return (
-    <div id="player" className="player">
-      <div className="player__container">
-        <Button
-          className="player__container-menuBtnDiv"
-          iconId="icon-menu"
-          onClick={props.navBtnClick}
-        />
+  const menuBtn = {
+    width: "4rem",
+    height: "4rem",
+    gridColumn: "4 / span 1",
+    gridRow: "2 / span 1",
+  };
 
-        <div className="player__container-heading">
+  const thumbnail = {
+    gridColumn: "2 / span 3",
+    gridRow: "4 / span 1",
+    width: "200px",
+    height: "100%",
+    backgroundSize: "contain",
+    transform: "none",
+  };
+
+  return (
+    <div className={`player ${className}`}>
+      <Container className="player__container">
+        <Button style={menuBtn} iconId="icon-menu" onClick={navBtnClick} />
+
+        <Heading>
           <p>Playing Now</p>
-        </div>
+        </Heading>
 
         <Thumbnail
-          className="playing__container-currentPlayingThumbnail"
+          style={thumbnail}
           imgSrc={`images/${imgName}`}
           defaultName="default"
         />
 
-        <div className="playing__container-songTitle">
+        <SongTitle>
           <p>{currentSelectedSong.title}</p>
-        </div>
+        </SongTitle>
 
-        <div className="playing__container-ArtistName">
+        <ArtistName>
           <p>{currentSelectedSong.artistName}</p>
-        </div>
+        </ArtistName>
 
-        <Timer />
-        <Slider />
-        <Controls />
-      </div>
+        <Timer
+          currentTime={timers.currentTime}
+          durationTime={timers.duration}
+        />
+
+        <Slider dotLeft={sliderVal.dotLeftVal} />
+
+        <Controls
+          isSongPlaying={isSongPlaying}
+          playPauseHandler={playPauseHandler}
+          previousBtnHandler={previousBtnHandler}
+          nextBtnHandler={nextBtnHandler}
+        />
+      </Container>
     </div>
   );
 };
 
 export default Player;
+
+const Container = styled.div`
+  display: grid;
+  grid-template-columns: 2rem 3rem 1fr 3rem 2rem;
+  grid-template-rows: 2rem 2.5rem 1rem 1fr 3rem 3rem 1rem 1rem 8rem 2rem;
+  grid-gap: 1rem;
+`;
+
+const Heading = styled.div`
+  grid-column: 3 / span 1;
+  grid-row: 3 / span 1;
+  justify-self: center;
+  align-self: center;
+
+  & p {
+    font-size: 1.2rem;
+    color: rgb(211, 210, 210);
+  }
+`;
+
+const SongTitle = styled.div`
+  grid-column: 2 / span 3;
+  grid-row: 5 / span 1;
+  justify-self: center;
+  align-self: center;
+  color: rgb(231, 231, 231);
+  font-weight: bold;
+  letter-spacing: 1.5px;
+
+  & p {
+    font-size: 2rem;
+  }
+`;
+
+const ArtistName = styled.div`
+  grid-column: 2 / span 3;
+  grid-row: 6 / span 1;
+  justify-self: center;
+  align-self: flex-start;
+  font-size: 1.2rem;
+  color: rgb(231, 231, 231);
+`;

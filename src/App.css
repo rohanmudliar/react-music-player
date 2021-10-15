@@ -23,3 +23,11 @@
 .hidden {
   display: none;
 }
+
+.selected {
+  background-color: var(--color-black-dark);
+}
+
+.selected svg {
+  fill: white;
+}

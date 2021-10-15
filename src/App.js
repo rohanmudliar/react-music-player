@@ -16,6 +16,7 @@ function App() {
   const [selectedRowId, setCurrentRowId] = useState(0);
   const [previousSelectedSong, setPreviousSelectedSong] = useState({});
   const [doReplaySong, setDoReplaySong] = useState(false);
+  const [sliderLine, setSliderLine] = useState({});
   const [currentSelectedSong, setCurrentSelectedSong] = useState(
     songsList[selectedRowId]
   );
@@ -29,7 +30,7 @@ function App() {
     dotLeftVal: 0,
   });
 
-  const songLoaded = () => {
+  const songLoaded = useCallback(() => {
     audio.play();
     setTimers((previousTimers) => ({
       ...previousTimers,
@@ -38,9 +39,9 @@ function App() {
 
     setSliderVal((previousState) => ({
       ...previousState,
-      noOfParts: (218 / audio.duration).toFixed(2),
+      noOfParts: (sliderLine.offsetWidth / audio.duration).toFixed(2),
     }));
-  };
+  }, [sliderLine]);
 
   const timeupdate = () => {
     setTimers((previousTimers) => ({
@@ -64,7 +65,7 @@ function App() {
     } else {
       setCurrentRowId((previousId) => previousId + 1);
     }
-  }, [selectedRowId]);
+  }, [selectedRowId, songLoaded]);
 
   const songPlaybackError = () => {
     alert("Please check your internet Connection");
@@ -112,6 +113,7 @@ function App() {
     setPreviousSelectedSong,
     isSongPlaying,
     songEnded,
+    songLoaded,
   ]);
 
   const navigateClickHandler = () => {
@@ -133,6 +135,7 @@ function App() {
         selectedRowId,
         setCurrentRowId,
         sliderVal,
+        setSliderLine,
       }}
     >
       <Player

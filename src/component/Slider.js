@@ -1,9 +1,19 @@
+import { useContext, useRef, useEffect } from "react";
 import styled from "styled-components";
 
+import PlayerStateContext from "../store/PlayerStateContext";
+
 const Slider = ({ dotLeft }) => {
+  const sliderLineElem = useRef();
+  const { setSliderLine } = useContext(PlayerStateContext);
+
+  useEffect(() => {
+    setSliderLine(sliderLineElem.current);
+  }, [sliderLineElem, setSliderLine]);
+
   return (
     <Container>
-      <NormalLine />
+      <NormalLine ref={sliderLineElem} />
       <Dot style={{ left: `${dotLeft}px` }} />
       <GradLine style={{ width: `${dotLeft}px` }} />
     </Container>
